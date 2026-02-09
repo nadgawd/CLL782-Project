@@ -1,0 +1,194 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{fancyhdr}
+
+% Page Setup
+\geometry{margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CLL782: Process Optimization}
+\rhead{Module 3.1: Environmental Load Modeling}
+\cfoot{\thepage}
+
+% Title Info
+\title{\textbf{Process Optimization Project Report}\\
+\large Module 3.1: Quantifying Environmental Load for Sustainable "Rendezvous"}
+\author{Your Name \\ Entry Number: 202XXXXX \\ Department of Chemical Engineering, IIT Delhi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% Declaration of Tool Usage
+\section*{Declaration of Tool Usage}
+I declare that in completing this assignment:
+\begin{itemize}
+    \item I used an LLM-based tool (Gemini) for assistance in:
+    \begin{itemize}
+        \item Brainstorming model formulations and exploring nonlinear crowding effects.
+        \item Formatting the mathematical expressions and generating LaTeX code.
+        \item Verifying the symbolic differentiation of the proposed objective function.
+    \end{itemize}
+    \item I understand the submitted solution fully.
+    \item I can explain and justify every part of my code and reasoning.
+    \item I have verified all results independently.
+\end{itemize}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+The "Rendezvous" cultural festival at IIT Delhi presents a significant logistical and environmental challenge. As part of the Sustainability Task Force, our objective in Module 3.1 is to develop a robust mathematical model to quantify the total environmental load ($E$) of the festival. This model balances exploration of complex system dynamics (crowding, economies of scale) with the exploitation of rigorous optimization techniques to identify trade-offs and guide sustainable decision-making.
+
+\section{Nomenclature}
+The variables and parameters used in the mathematical model are defined in Table \ref{tab:nomenclature}.
+
+\begin{table}[h]
+\centering
+\caption{Nomenclature Table}
+\label{tab:nomenclature}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+\textbf{Symbol} & \textbf{Description} & \textbf{Units} & \textbf{Type} \\ \midrule
+$N$ & Number of attendees & persons & Decision Var \\
+$S$ & Number of food stalls/vendors & count & Decision Var \\
+$A$ & Total event activities & activity-hours & Decision Var \\
+$E$ & Total environmental load & kg CO$_2$-eq & Objective Fn \\
+$\alpha_1$ & Base per-capita impact coefficient & kg CO$_2$-eq/person & Parameter \\
+$\alpha_2$ & Base per-stall impact coefficient & kg CO$_2$-eq/stall & Parameter \\
+$\gamma_{NS}$ & Congestion penalty coefficient & kg CO$_2$-eq $\cdot$ stall/person$^2$ & Parameter \\
+$\beta_1$ & Nonlinear crowding exponent (attendees) & dimensionless & Parameter \\
+$\beta_2$ & Nonlinear scaling exponent (stalls) & dimensionless & Parameter \\
+$\epsilon$ & Grid emission factor & kg CO$_2$/kWh & Parameter \\
+$\tau$ & Average event duration per attendee & hours & Parameter \\
+$\xi$ & Sustainability Efficiency Metric & kg CO$_2$-eq/(person$\cdot$hr) & Derived Var \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Assumptions and Justifications}
+To develop a tractable yet expressive model, the following assumptions are made based on Life Cycle Assessment (LCA) principles and chemical engineering process economics (Letterman, 1980):
+
+\begin{enumerate}
+    \item \textbf{A1: Nonlinear Crowding Effects (Diseconomies of Scale)}. 
+    \textit{Justification}: Environmental impact does not scale linearly with attendee density. As crowd density increases, waste collection efficiency drops, littering increases (overflowing bins), and resource competition leads to higher per-capita waste generation. We model this with a superlinear term $N^{\beta_1}$ where $\beta_1 > 1$.
+    
+    \item \textbf{A2: Economie of Scale in Infrastructure}.
+    \textit{Justification}: High-fixed-cost infrastructure (generators, stages) becomes more efficient per unit of activity as scale increases. However, the total load still grows. For activities $A$, we use a sublinear power term $A^{0.8}$ for base energy load, reflecting standard equipment scaling laws (0.6-factor rule).
+    
+    \item \textbf{A3: Congestion-Induced Waste Leakage}.
+    \textit{Justification}: When the ratio of attendees to service points (stalls $S$) is high ($N/S \gg \text{capacity}$), "leakage" occurs in the form of unsegregated waste and littering. This is modeled as a penalty term proportional to $N^2/S$.
+    
+    \item \textbf{A4: Sub-component Decomposition}.
+    \textit{Justification}: The total load $E$ is the sum of Energy ($E_{energy}$), Waste ($W_{total}$), and Emissions ($E_{emissions}$), adhering to ISO 14040 LCA framework boundaries (Cradle-to-Grave for site operations).
+\end{enumerate}
+
+\section{Mathematical Model Formulation}
+
+\subsection{Objective Function Construction}
+We propose a multi-variable objective function $E(N, S, A)$ comprising three components: Linear Base Load ($E_{base}$), Nonlinear Scale Effects ($E_{scale}$), and Interaction/Congestion Penalties ($E_{inter}$).
+
+\begin{equation}
+    E(N, S, A) = E_{base} + E_{scale} + E_{inter}
+\end{equation}
+
+Substituting the terms:
+\begin{equation} \label{eq:full_model}
+    E(N, S, A) = (\alpha_1 N + \alpha_2 S + \alpha_3 A) + (\beta_N N^{1.3} + \beta_S S^{1.2} + \beta_A A^{0.8}) + \left( \gamma_{NS} \frac{N^2}{S} \right)
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $\alpha_1 N$: Direct resource consumption per attendee.
+    \item $N^{1.3}$: The superlinear crowding term.
+    \item $\gamma_{NS} \frac{N^2}{S}$: The \textbf{Congestion Penalty}. As $S \to 0$ for fixed $N$, environmental load explodes due to waste management failure. As $S \to \infty$, this term vanishes (perfect service), but the direct cost $\alpha_2 S$ increases. This creates a trade-off.
+\end{itemize}
+
+\subsection{Sub-Component Integration}
+The aggregate function $E$ is derived from specific engineering estimates:
+
+\begin{align}
+    E_{energy} &= \epsilon \cdot \tau \cdot (P_{light} N + P_{stall} S + P_{stage} A) \\
+    W_{total} &= \phi_{waste} \cdot N \cdot (1 + k_{crowd} \frac{N}{S}) \label{eq:waste_model} \\
+    CO2e &= E_{transp} + E_{gen} + E_{mat}
+\end{align}
+
+Equation (\ref{eq:waste_model}) explicitly shows how waste generation rate depends on the crowding ratio $N/S$.
+
+\section{Optimization Analysis}
+
+\subsection{Unconstrained Optimization of $E$}
+We seek to minimize $E(N, S, A)$ over the domain $N, S, A \ge 0$.
+
+\textbf{Gradient Check}:
+\begin{align}
+    \frac{\partial E}{\partial N} &= \alpha_1 + 1.3 \beta_N N^{0.3} + \frac{2 \gamma_{NS} N}{S} > 0 \quad (\text{always positive for } N,S > 0) \\
+    \frac{\partial E}{\partial A} &= \alpha_3 + 0.8 \beta_A A^{-0.2} > 0
+\end{align}
+Since the gradient components for productivity variables ($N, A$) are strictly positive, the unconstrained global minimum lies at the trivial solution:
+\begin{equation}
+    (N^*, S^*, A^*) = (0, 0, 0)
+\end{equation}
+\textbf{Insight}: Minimizing total environmental footprint to zero implies having no festival. This formulation, while chemically accurate, does not capture the \textit{value} of the event.
+
+\subsection{Sub-Optimization: Optimal Stall Count}
+However, for a \textbf{fixed number of attendees} $N$, there exists an optimal infrastructure level $S^*$. Differentiating $E$ with respect to $S$:
+
+\begin{equation}
+    \frac{\partial E}{\partial S} = \alpha_2 + 1.2 \beta_S S^{0.2} - \gamma_{NS} \frac{N^2}{S^2}
+\end{equation}
+
+Setting $\frac{\partial E}{\partial S} = 0$:
+\begin{equation}
+    \alpha_2 + 1.2 \beta_S S^{0.2} = \gamma_{NS} \frac{N^2}{S^2}
+\end{equation}
+
+The LHS represents the \textit{Marginal Environmental Cost} of adding a stall (embodied carbon, power). The RHS represents the \textit{Marginal Environmental Benefit} of reducing congestion (less litter). 
+The unique intersection $S^*(N)$ defines the optimal resource allocation for any crowd size. 
+Approximating for small nonlinearities ($\beta_S \approx 0$):
+\begin{equation}
+    S^* \approx N \sqrt{\frac{\gamma_{NS}}{\alpha_2}}
+\end{equation}
+This square-root law suggests that infrastructure should scale linearly with crowd size to maintain constant congestion levels $(N/S)$, but considering base costs, an optimal ratio emerges.
+
+\subsection{Sustainability Efficiency (Part e)}
+To address the trivial minimum problem, we refine the objective to minimize \textbf{Impact Intensity} or maximize \textbf{Sustainability Efficiency} ($\xi$):
+
+\begin{equation}
+    \text{minimize } \xi(N, S, A) = \frac{E(N, S, A)}{N \cdot \tau}
+\end{equation}
+
+This function represents the environmental cost per "attendee-hour".
+\begin{align}
+    \xi &= \frac{\alpha_1}{\tau} + \frac{\alpha_2 S}{N\tau} + \frac{\alpha_3 A}{N\tau} + \frac{\gamma_{NS} N}{S\tau} + \dots
+\end{align}
+Minimizing $\xi$ with respect to $N$ now involves trade-offs between fixed environmental costs (stalls, stages) which benefit from economies of scale (larger $N$), and crowding costs ($\gamma_{NS} N/S$) which penalize scale. This formulation yields a non-trivial measure of the "greenest" event scale.
+
+\section{Preliminary Insights and Discussion}
+\begin{itemize}
+    \item \textbf{Crowding is Environmentally Expensive}: The term $\gamma_{NS} N^2/S$ is the dominant driver of inefficiency at large scales. Investing in sufficient infrastructure ($S$) is not just operationally necessary but environmentally critical to prevent waste leakage.
+    \item \textbf{Economies of Scale}: The sublinear energy term for activities ($A^{0.8}$) suggests that consolidating entertainment into fewer, high-quality events is greener than many small, fragmented setups.
+    \item \textbf{Critical Ratio}: The analysis reveals a critical Attendee-to-Stall ratio ($N/S)_{crit} = \sqrt{\alpha_2/\gamma_{NS}}$. Operating above this ratio causes environmental load to spike due to congestion.
+\end{itemize}
+
+\section{References}
+\begin{enumerate}
+    \item Edgar, T.F., Himmelblau, D.M., \& Lasdon, L.S. (2001). \textit{Optimization of Chemical Processes}, 2nd ed. McGraw-Hill.
+    \item Letterman, R.D. (1980). Economic analysis of granular-bed filtration. \textit{Journal of the Environmental Engineering Division}, 106, 279–291.
+    \item ISO 14040:2006. Environmental management — Life cycle assessment — Principles and framework.
+    \item Prakash, O. (2025). \textit{Course Lecture Notes: Project Details}, CLL782/CHL7204, IIT Delhi.
+\end{enumerate}
+
+\end{document}

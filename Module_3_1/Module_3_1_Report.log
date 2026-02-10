@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.16)  9 FEB 2026 15:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.16)  10 FEB 2026 01:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -392,8 +392,7 @@ ef
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count304
 \l__pdf_internal_box=\box57
-)
-No file Module_3_1_Report.aux.
+) (Module_3_1/Module_3_1_Report.aux)
 \openout1 = `Module_3_1_Report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
@@ -414,6 +413,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -473,12 +473,14 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring OFF on input line 26.
+ (Module_3_1/Module_3_1_Report.out) (Module_3_1/Module_3_1_Report.out)
 \@outlinefile=\write3
 \openout3 = `Module_3_1_Report.out'.
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 29.
 
- (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsa.fd
+
+(/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 29.
@@ -487,7 +489,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 29.
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-No file Module_3_1_Report.toc.
+(Module_3_1/Module_3_1_Report.toc)
 \tf@toc=\write4
 \openout4 = `Module_3_1_Report.toc'.
 
@@ -496,11 +498,6 @@ No file Module_3_1_Report.toc.
 [1
 
 {/usr/local/texlive/2025basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: Reference `tab:nomenclature' on page 2 undefined on input line 5
-6.
-
-
 Overfull \hbox (6.79216pt too wide) in paragraph at lines 62--79
  [][] 
  []
@@ -515,10 +512,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [2]
-
-LaTeX Warning: Reference `eq:waste_model' on page 3 undefined on input line 128
-.
-
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 132.
@@ -566,30 +559,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `Module_3_1_Report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Module_3_1_Report.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  22537B766A93C3ABBBF185379B629AFF;2195.
+Package rerunfilecheck Info: File `Module_3_1_Report.out' has not changed.
+(rerunfilecheck)             Checksum: 22537B766A93C3ABBBF185379B629AFF;2195.
  ) 
 Here is how much of TeX's memory you used:
- 11687 strings out of 474662
- 179772 string characters out of 5751108
- 597379 words of memory out of 5000000
- 34544 multiletter control sequences out of 15000+600000
+ 11711 strings out of 474662
+ 180289 string characters out of 5751108
+ 597613 words of memory out of 5000000
+ 34560 multiletter control sequences out of 15000+600000
  567543 words of font info for 68 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 75i,11n,79p,565b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,565b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/yash/Library/texlive/2025basic/texmf-var/fonts/pk/ljfour/jknappen/ec
 /tcrm1095.600pk></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public
@@ -605,10 +585,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025basic/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025ba
 sic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/202
 5basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Module_3_1/Module_3_1_Report.pdf (5 pages, 184228 bytes).
+Output written on Module_3_1/Module_3_1_Report.pdf (5 pages, 187330 bytes).
 PDF statistics:
- 145 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
+ 196 PDF objects out of 1000 (max. 8388607)
+ 160 compressed objects within 2 object streams
  42 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 97 words of extra memory for PDF output out of 10000 (max. 10000000)
 

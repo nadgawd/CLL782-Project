@@ -41,13 +41,13 @@ sub_regions = {
         "description": "Cricket Ground, Indoor Sports, Play Ground. Large open area.",
         "type": "open_ground"
     },
-    "East: Academic Core + Main Gate": {
-        "acres": 35.0,
-        "description": "Main Building, Library, LHC, and corridor to Main Gate.",
-        "type": "academic_core"
+    "East: Academic Core + Rose Garden": {
+        "acres": 30.0,
+        "description": "Main Building, Library, LHC, Block 99C, Rose Garden.",
+        "type": "academic_green"
     },
     "Pathways & Circulation": {
-        "acres": 8.0,
+        "acres": 5.0,
         "description": "Internal roads connecting the zones.",
         "type": "circulation"
     }
@@ -91,23 +91,28 @@ map_path = "/Users/yash/Desktop/CLL788 Project/iitd-campus-map.jpg"
 img = Image.open(map_path)
 W, H = img.size
 
-# Refined Polygon Vertices (Calibrated to 3200x1800 map landmarks)
-# Based on browser analysis of key points:
-# Nalanda (500, 720), SAC (900, 990), Sports (1460, 970), Main Bldg (1950, 540), Main Gate (2300, 180)
+# Refined Polygon Vertices (Traced from User Attachment - Step 266)
+# West: Encloses Nalanda, OAT, SAC.
+# Connector: South of Hospital, North of Residences.
+# Center: Main Grounds, Indoor Sports.
+# East: Loop around Library, Main Bldg, Rose Garden, Block 99C, LHC.
 
 roi_polygon = [
-    (450, 650),   # Nalanda Top-Left (North of Parking)
-    (450, 880),   # Nalanda Bottom-Left
-    (900, 1060),  # South of SAC/OAT boundary
-    (1500, 1120), # South of Sports Complex
-    (2100, 920),  # South of LHC / Block 99
-    (2380, 350),  # East Edge near Main Gate
-    (2340, 120),  # Main Gate North Tip
-    (2180, 120),  # Main Gate West
-    (1900, 400),  # North of Main Building
-    (1700, 600),  # North of Academic Central
-    (1300, 820),  # Neck North (South of Jia Sarai)
-    (900, 820),   # SAC North
+    (450, 680),   # Nalanda Top-Left (North of Nalanda)
+    (450, 980),   # OAT Bottom-Left (South of OAT)
+    (900, 1020),  # SAC South-East
+    (1400, 1050), # South of Main Grounds
+    (1700, 1050), # South of Indoor Sports
+    (2100, 950),  # South of LHC / Block 99B
+    (2250, 850),  # South-East of Block 99C
+    (2300, 600),  # East of Rose Garden
+    (2200, 400),  # North of Rose Garden
+    (1950, 450),  # North of Main Building
+    (1750, 550),  # North of Library
+    (1450, 780),  # North of Main Grounds (South of Academic)
+    (1250, 800),  # Neck (South of Hospital)
+    (900, 780),   # North of SAC
+    (450, 680),   # Back to Start
 ]
 
 # Draw semi-transparent ROI overlay
@@ -176,7 +181,7 @@ print(f"""
 \\textbf{{Zone}} & \\textbf{{Description}} & \\textbf{{Area (ac)}} & \\textbf{{Type}} \\\\ \\midrule
 West & SAC, OAT, Nalanda, Parking & {sub_regions['West: SAC + OAT + Nalanda']['acres']:.0f} & Event Venue \\\\
 Center & Sports Complex (Indoor/Outdoor) & {sub_regions['Center: Sports Complex']['acres']:.0f} & Open Ground \\\\
-East & Academic Core, LHC to Main Gate & {sub_regions['East: Academic Core + Main Gate']['acres']:.0f} & Academic \\\\
+East & Academic Core, LHC to Main Gate & {sub_regions['East: Academic Core + Rose Garden']['acres']:.0f} & Academic \\\\
 Circulation & Connecting Pathways & {sub_regions['Pathways & Circulation']['acres']:.0f} & Roads \\\\
 \\midrule
   & \\textbf{{Total ROI}} & \\textbf{{{total_roi_acres:.0f}}} & --- \\\\

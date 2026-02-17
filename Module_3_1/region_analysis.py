@@ -82,46 +82,38 @@ print(f"Cell side length: {side_len:.0f} m × {side_len:.0f} m")
 # ============================================================
 # GENERATE ANNOTATED CAMPUS MAP
 # ============================================================
+
+# ============================================================
+# GENERATE ANNOTATED CAMPUS MAP
+# ============================================================
 print(f"\nGeneratng map...")
 map_path = "/Users/yash/Desktop/CLL788 Project/iitd-campus-map.jpg"
 img = Image.open(map_path)
 W, H = img.size
 
-# Refined Polygon Vertices (Traced from visual inspection)
+# Refined Polygon Vertices (Calibrated to 3200x1800 map landmarks)
+# Based on browser analysis of key points:
+# Nalanda (500, 720), SAC (900, 990), Sports (1460, 970), Main Bldg (1950, 540), Main Gate (2300, 180)
+
 roi_polygon = [
-    # West Loop (Nalanda Area)
-    (310, 390),   # Bottom-left of Nalanda
-    (310, 270),   # Top-left (North of Parking)
-    (460, 270),   # Top-right of West Loop
-    (460, 300),   # Dip inwards
-    
-    # Neck (South of Jia Sarai)
-    (550, 300),   # Start of neck
-    (650, 290),   # Path above Main Grounds
-    
-    # East Expansion (Academic & Main Gate)
-    (750, 240),   # North of Main Building
-    (900, 210),   # North of Library/Academic
-    (1050, 130),  # Towards Main Gate (Top Right)
-    (1160, 140),  # Main Gate Entry Area
-    (1160, 360),  # South along East Road
-    (1050, 380),  # South of LHC / Block 99
-    (900, 390),   # South of LHC
-    (750, 410),   # South of Main Building
-    
-    # Center Bottom (Sports)
-    (650, 420),   # South of Indoor Sports
-    (550, 420),   # South of Main Grounds
-    
-    # West Bottom Return
-    (480, 410),   # Connector
-    (310, 390),   # Close loop
+    (450, 650),   # Nalanda Top-Left (North of Parking)
+    (450, 880),   # Nalanda Bottom-Left
+    (900, 1060),  # South of SAC/OAT boundary
+    (1500, 1120), # South of Sports Complex
+    (2100, 920),  # South of LHC / Block 99
+    (2380, 350),  # East Edge near Main Gate
+    (2340, 120),  # Main Gate North Tip
+    (2180, 120),  # Main Gate West
+    (1900, 400),  # North of Main Building
+    (1700, 600),  # North of Academic Central
+    (1300, 820),  # Neck North (South of Jia Sarai)
+    (900, 820),   # SAC North
 ]
 
 # Draw semi-transparent ROI overlay
 overlay = Image.new('RGBA', img.size, (0, 0, 0, 0))
 overlay_draw = ImageDraw.Draw(overlay)
-overlay_draw.polygon(roi_polygon, fill=(255, 50, 50, 40), outline=(255, 0, 0, 150)) # Lighter fill
+overlay_draw.polygon(roi_polygon, fill=(255, 50, 50, 30), outline=(255, 0, 0, 100)) # Very light fill
 img_rgba = img.convert('RGBA')
 img_composite = Image.alpha_composite(img_rgba, overlay)
 draw_final = ImageDraw.Draw(img_composite)
@@ -130,7 +122,7 @@ draw_final = ImageDraw.Draw(img_composite)
 for i in range(len(roi_polygon)):
     x1, y1 = roi_polygon[i]
     x2, y2 = roi_polygon[(i + 1) % len(roi_polygon)]
-    draw_final.line([(x1, y1), (x2, y2)], fill=(200, 0, 0, 255), width=3)
+    draw_final.line([(x1, y1), (x2, y2)], fill=(200, 0, 0, 200), width=3)
 
 # ============================================================
 # DRAW FINE GRID LINES
@@ -149,53 +141,29 @@ n_rows = int(math.ceil(n_cells / n_cols))
 cell_w = roi_width / n_cols
 cell_h = roi_height / n_rows
 
-grid_color = (0, 80, 200, 150)  # Blue grid, thinner
+grid_color = (0, 60, 180, 120)  # Subtle blue grid
 
 # Draw lines
 for i in range(n_cols + 1):
     x = min_x + i * cell_w
-    draw_final.line([(x, min_y), (x, max_y)], fill=grid_color, width=1)
+    # Clip line to polygon? No, draw full grid inside box, easier.
+    # User asked for "grids on the region of interest". 
+    # Drawing bounding box grid is cleaner than clipping for now.
+    draw_final.line([(x, min_y), (x, max_y)], fill=grid_color, width=2)
+    
 for j in range(n_rows + 1):
     y = min_y + j * cell_h
-    draw_final.line([(min_x, y), (max_x, y)], fill=grid_color, width=1)
+    draw_final.line([(min_x, y), (max_x, y)], fill=grid_color, width=2)
 
-# Draw Labels (Only for cells inside ROI, small font)
-try:
-    font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 10)
-except:
-    font = ImageFont.load_default()
-
-cell_num = 1
-for row in range(n_rows):
-    for col in range(n_cols):
-        cx = min_x + (col + 0.5) * cell_w
-        cy = min_y + (row + 0.5) * cell_h
-        
-        # Simple point-in-polygon check
-        # Ray casting algorithm
-        inside = False
-        n = len(roi_polygon)
-        p1x, p1y = roi_polygon[0]
-        for i in range(n+1):
-            p2x, p2y = roi_polygon[i % n]
-            if cy > min(p1y, p2y):
-                if cy <= max(p1y, p2y):
-                    if cx <= max(p1x, p2x):
-                        if p1y != p2y:
-                            xinters = (cy-p1y)*(p2x-p1x)/(p2y-p1y)+p1x
-                        if p1x == p2x or cx <= xinters:
-                            inside = not inside
-            p1x, p1y = p2x, p2y
-            
-        if inside:
-            label = str(cell_num)
-            draw_final.text((cx-5, cy-5), label, fill=(0, 0, 150), font=font)
-            cell_num += 1
-
-# Save
+# Save - Clean Map, No framing
 output_path = "/Users/yash/Desktop/CLL788 Project/Module_3_1/iitd_roi_grid_map.png"
 img_composite.save(output_path)
 print(f"Map saved to: {output_path}")
+
+# New Area Calculation based on polygon pixels?
+# Scale: Map width 3200 px approx = ??? meters
+# Better to trust the sub_region estimates which sum to ~93 acres.
+# The visual is just an overlay.
 
 # LaTeX Table
 print(f"""

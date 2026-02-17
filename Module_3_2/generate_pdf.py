@@ -11,6 +11,22 @@ plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['font.family'] = 'serif' 
 plt.rcParams['font.serif'] = ['Times New Roman']
 
+def sanitize_text(text):
+    """Sanitize text to be compatible with Latin-1 encoding."""
+    replacements = {
+        '\u2013': '-',   # en-dash
+        '\u2014': '--',  # em-dash
+        '\u2018': "'",   # left single quote
+        '\u2019': "'",   # right single quote
+        '\u201c': '"',   # left double quote
+        '\u201d': '"',   # right double quote
+        '\u2026': '...', # ellipsis
+        '\u20b9': 'Rs. ', # Rupee symbol
+    }
+    for char, repl in replacements.items():
+        text = text.replace(char, repl)
+    return text
+
 def render_math_to_image(formula, fontsize=12):
     """Renders a LaTeX formula to an image (BytesIO) using matplotlib."""
     # Fix common latex compatibility issues with mathtext
@@ -60,6 +76,7 @@ class PDFReport(FPDF):
         def flush_text():
             if buffer_text:
                 txt = " ".join(buffer_text)
+                txt = sanitize_text(txt)
                 self.set_x(self.l_margin) 
                 self.set_font("Times", "", 12) 
                 
@@ -88,6 +105,7 @@ class PDFReport(FPDF):
                 flush_text()
                 level = len(line.split(' ')[0])
                 text = line.lstrip('#').strip()
+                text = sanitize_text(text) # SANITIZE
                 size = 16 if level == 1 else 14 if level == 2 else 12
                 self.set_x(self.l_margin)
                 self.set_font("Times", "B", size)
@@ -113,6 +131,7 @@ class PDFReport(FPDF):
                 self.set_font("Times", "", 12)
                 self.set_x(self.l_margin + 6) 
                 content = line[2:]
+                content = sanitize_text(content) # SANITIZE
                 
                 content = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', content)
                 content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', content)
@@ -157,6 +176,7 @@ class PDFReport(FPDF):
                                      
                                  for datum in row:
                                      datum = datum.replace('$', '')
+                                     datum = sanitize_text(datum) # SANITIZE
                                      row_obj.cell(datum)
                     except Exception as e:
                         print(f"Table rendering error: {e}")
@@ -189,24 +209,7 @@ class PDFReport(FPDF):
                 self.set_x(self.l_margin)
                 if img_buf:
                     # Logic to calculate dimensions
-                    # We want to place image.
-                    # We set width to 50% of page width.
                     img_target_width = self.w * 0.5
-                    
-                    # We need the aspect ratio to know height.
-                    # img_buf contains a PNG. We can read it with PIL or just rely on fpdf to place it?
-                    # fpdf.image() doesn't return height.
-                    # But we generated it with matplotlib.
-                    # We can assume a default aspect for safe spacing, or read headers.
-                    # Or simpler: matplotlib `savefig` with `bbox_inches='tight'` creates variable size.
-                    # Let's peek at the image using PIL? No PIL module imported.
-                    
-                    # Let's guess/calculate from Matplotlib settings.
-                    # No, bbox_tight makes it variable.
-                    
-                    # Alternative: Let FPDF calculate it?
-                    # self.image(..., h=0) maintains aspect ratio.
-                    # But we need to know how much Y increased.
                     
                     y_before = self.get_y()
                     
@@ -216,32 +219,6 @@ class PDFReport(FPDF):
                     
                     # Place image.
                     self.image(img_buf, w=img_target_width, x=(self.w - img_target_width)/2)
-                    
-                    # Since we don't know the height fpdf used interactively easily without checking the object,
-                    # We can assume a max height or safe buffer. 
-                    # Most single line formulas will be around 1-2cm high.
-                    # Let's allocate 20mm for now, or use a heuristic.
-                    # BETTER: Use a fixed height for the image in Matplotlib if possible? No, tight bbox is good.
-                    
-                    # Hack: Read the last inserted image info from fpdf structure if possible?
-                    # fpdf.images is a dict.
-                    # keys are hashes.
-                    
-                    # Let's just be generous with spacing.
-                    # A typical formula line isn't taller than 25mm (1 inch) usually.
-                    # Let's shift Y by 20mm.
-                    
-                    # Wait, if I don't update Y, `ln` updates from LAST Y?
-                    # `self.image` does NOT update Y.
-                    # So `y_after` is still `y_before`.
-                    # I must manually set Y.
-                    
-                    # Let's estimate height based on 8:1.5 ratio from figure size?
-                    # 8 width : 1.5 height.
-                    # But we used bbox_tight, so it stripped whitespace.
-                    # The height is likely much less than 1.5 inches (38mm) relative to width.
-                    
-                    # Let's try 15mm as base + 5mm padding = 20mm.
                     
                     img_height = 20 # Approximation
                     

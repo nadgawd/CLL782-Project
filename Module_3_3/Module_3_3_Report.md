@@ -71,7 +71,7 @@ The variables and parameters used in the mathematical model are defined in Table
 ### 4. Data Estimation and Context (IIT Delhi Specifics)
 To ensure the model is grounded in reality, the following well-supported approximations are used for coefficients:
 
-*   **Scope:** The analysis focuses on the **90-acre high-intensity zone** (OAT, Nalanda, LHC, etc.), generating approx **6,000 kg/day** of waste at peak footfall [Module 3.2].
+*   **Scope:** The analysis focuses on the **82-acre high-intensity zone** (OAT, Nalanda, LHC, etc.), generating approx **6,000 kg/day** of waste at peak footfall [Module 3.2].
 *   **Waste Composition:** Based on institutional norms, we estimate: 40% Organic (Food), 40% Recyclable (Paper/Plastic), 20% Inert/Mixed [3].
 *   **Vehicle Fleet (Small Commercial Vehicles):**
     *   **Type:** Electric Garbage Tippers (e.g., Tata Ace EV) suitable for campus roads.

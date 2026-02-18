@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.16)  18 FEB 2026 00:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.16)  18 FEB 2026 15:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1089,22 +1089,44 @@ e 136.
 [5
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 182--182
+[]|\OT1/cmss/m/n/9 Crowding non-lin-ear-ity co-eff.
+ []
+
+
+Underfull \hbox (badness 6493) in paragraph at lines 182--182
+[]|\OT1/cmss/m/n/9 Stall scal-ing non-lin-ear-ity co-eff.
+ []
+
+
+Overfull \vbox (6.5222pt too high) detected at line 182
+ []
+
+
 
 [6
 
 ]
+Overfull \vbox (2.26956pt too high) detected at line 205
+ []
+
+
 
 [7
 
 ]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 220.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 231.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <8> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 220.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 231.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <6> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 220.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 231.
+
+
+Overfull \vbox (56.63875pt too high) detected at line 231
+ []
 
 
 
@@ -1116,10 +1138,10 @@ LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <6> not available
 
 ]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <9> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 265.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 276.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 265.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 276.
 
 
 
@@ -1135,10 +1157,10 @@ LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
 
 ]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 341.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 352.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <7> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 341.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 352.
 
 
 
@@ -1199,36 +1221,37 @@ Package rerunfilecheck Info: File `ppt.out' has not changed.
 (rerunfilecheck)             Checksum: 09B09D7E9C2788D0E7C025969DE16F22;1241.
  ) 
 Here is how much of TeX's memory you used:
- 28022 strings out of 474662
- 592943 string characters out of 5751108
- 920159 words of memory out of 5000000
- 50509 multiletter control sequences out of 15000+600000
- 574056 words of font info for 91 fonts, out of 8000000 for 9000
+ 28028 strings out of 474662
+ 593018 string characters out of 5751108
+ 920161 words of memory out of 5000000
+ 50514 multiletter control sequences out of 15000+600000
+ 575303 words of font info for 96 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 101i,14n,107p,378b,1021s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,13n,107p,378b,1021s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex1
 0.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmss12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmss17.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025basic/texmf-dist/font
-s/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2025basic/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2025basic/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2025basic/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/texlive/2025ba
-sic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/20
-25basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/local/texliv
-e/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
-xlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local
-/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on ppt.pdf (22 pages, 1309835 bytes).
+ts/cm/cmmi7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmss17.pfb></usr/local/texlive/2025basic/texmf-dist/font
+s/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025basic/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2025basic/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2025basic/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2025basi
+c/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/texlive/202
+5basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive
+/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/local/tex
+live/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
+/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/lo
+cal/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+Output written on ppt.pdf (22 pages, 1319268 bytes).
 PDF statistics:
- 285 PDF objects out of 1000 (max. 8388607)
- 206 compressed objects within 3 object streams
+ 290 PDF objects out of 1000 (max. 8388607)
+ 209 compressed objects within 3 object streams
  51 named destinations out of 1000 (max. 500000)
  150 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -57,10 +57,10 @@ The variables and parameters used in the mathematical model are defined in Table
 | $Z$ | Total Weighted Walking Distance (User Inconvenience) | person-m | Objective Fn |
 
 ### 3. Assumptions and Justifications
-1.  **A1: Active Festival Zone (90 Acres).**
-    *   **Justification:** While the IIT Delhi campus is ~320 acres [1], the festival activities are concentrated in a specific HIGH-INTENSITY zone of approx. **90 acres**. This includes the Open Air Theatre (OAT), Nalanda Ground, Main Road axis, Lecture Hall Complex (LHC), Biotech Lawn, Amul area, and Red Square [User Specified]. We model only this dense subset to optimize resources where they are needed most.
+1.  **A1: Active Festival Zone (82 Acres).**
+    *   **Justification:** While the IIT Delhi campus is ~320 acres [1], the festival activities are concentrated in a specific HIGH-INTENSITY zone of approx. **82 acres** (~26% of campus). This includes the Open Air Theatre (OAT), Nalanda Ground, Main Road axis, Lecture Hall Complex (LHC), Biotech Lawn, Amul area, and Red Square [User Specified]. We model only this dense subset to optimize resources where they are needed most.
 2.  **A2: Greenery Protection.**
-    *   **Justification:** Significant portions of this 90-acre zone (Biotech Lawn, area in front of LHC) are softscapes. Bins must be placed on **hardscape edges** (roads, paved paths) to prevent trampling of green cover.
+    *   **Justification:** Significant portions of this 82-acre zone (Biotech Lawn, area in front of LHC) are softscapes. Bins must be placed on **hardscape edges** (roads, paved paths) to prevent trampling of green cover.
 3.  **A3: Peak Surge Demand.**
     *   **Justification:** The system is designed for *peak* footfall (Rendezvous attendance ~160,000 over 4 days [2]). We assume a safe design factor where peak hourly load determines capacity, ensuring no overflow during concerts or events.
 
@@ -69,12 +69,12 @@ To ensure the model is grounded in reality, the following well-supported approxi
 
 *   **Campus Area Scope:**
     *   **Total Campus:** ~320 Acres [1].
-    *   **Modeled Zone:** **90 Acres** (~0.36 km²).
+    *   **Modeled Zone:** **82 Acres** (~0.33 km²).
     *   **Key Locations:** OAT, Nalanda Ground, LHC Complex, Red Square, Amul Area.
 *   **Footfall ($F_i$):**
     *   **Total Attendees:** ~160,000 over 4 days [2].
     *   **Daily Peak:** ~40,000 visitors/day.
-    *   **Zone Concentration:** **100%** of the crowd is assumed to be within the 90-acre hub at peak times (e.g., Star Night), resulting in a peak density of **40,000 people**.
+    *   **Zone Concentration:** **100%** of the crowd is assumed to be within the 82-acre hub at peak times (e.g., Star Night), resulting in a peak density of **40,000 people**.
 *   **Waste Generation Rate ($w$):**
     *   **Definition:** Average mass of solid waste generated per attendee per visit.
     *   **Justification:** While the national urban average is 0.45 kg/capita/day [3], festival attendees consume significantly more disposables (plates, cups, bottles) in a shorter window.
@@ -125,7 +125,7 @@ $$ y_{j,t} \in \{0, 1\} $$
 $$ 0 \le a_{i,j,t} \le 1 $$
 
 ### 6. Optimization Analysis
-*   **Complexity:** This is an NP-hard FLP. With the reduced scope of 90 acres, we can discretize the area into a grid (e.g., $20m \times 20m$), resulting in feasible computation times.
+*   **Complexity:** This is an NP-hard FLP. With the reduced scope of 82 acres, we can discretize the area into a grid (e.g., $20m \times 20m$), resulting in feasible computation times.
 *   **Trade-offs:** We expect a high density of bins around OAT and Amul (food zones) due to high $F_i$ and $w$, while the Main Road will have spaced-out bins primarily satisfying the $R_t$ constraint.
 
 ### 7. References

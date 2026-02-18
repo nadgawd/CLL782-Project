@@ -159,35 +159,43 @@
     \begin{table}
         \caption{Module 3.1 --- Variables and Parameters}
         \centering\footnotesize
-        \begin{tabular}{l p{5.2cm} l l}
+        \begin{tabular}{l p{4.8cm} l l}
             \toprule
             \textbf{Symbol} & \textbf{Description} & \textbf{Unit} & \textbf{Type} \\ \midrule
-            $N$ & Number of attendees & Persons & Parameter \\
+            $N$ & Number of attendees & Persons & \textbf{Decision Var} \\
             $S$ & Number of food stalls & Stalls & \textbf{Decision Var} \\
-            $A$ & Activity duration (concerts, events) & Hours & Decision Var \\
+            $A$ & Activity duration (concerts, events) & Activity-hrs & \textbf{Decision Var} \\
             $E$ & Total environmental load & kg CO$_2$-eq & Objective \\
             \midrule
             $\alpha_1$ & Per-capita base impact & 2.5 kg/p & Constant \\
             $\alpha_2$ & Per-stall embodied energy impact & 18 kg/stall & Constant \\
-            $\beta_N$ & Crowding exponent (Urban scaling) & 1.3 & Constant \\
+            $\alpha_3$ & Per-activity base impact & 12 kg/act-hr & Constant \\
+            $\beta_N$ & Crowding nonlinearity coeff.\ (exp.~1.3) & 0.002 & Constant \\
+            $\beta_S$ & Stall scaling nonlinearity coeff.\ (exp.~1.2) & 0.5 & Constant \\
+            $\beta_A$ & Activity scaling coeff.\ (exp.~0.8) & 5.0 & Constant \\
             $\gamma_{NS}$ & Congestion penalty coefficient & 0.0005 & Constant \\
             \bottomrule
         \end{tabular}
     \end{table}
 
-    \footnotesize \textbf{Ref:} Bettencourt et al.\ (2007) for $\beta_N=1.3$; CPCB (2021) for waste norms; CEA (2024) for grid emission.
+    \footnotesize \textbf{Ref:} Bettencourt et al.\ (2007) for $N^{1.3}$ scaling; CPCB (2021) for waste norms; CEA (2024) for grid emission.
 \end{frame}
 
 % --- Slide 3/4 ---
 \begin{frame}{3.1 Mathematical Formulation}
     \begin{alertblock}{Environmental Load Function}
-        $$ E = \underbrace{(\alpha_1 N + \alpha_2 S)}_{\text{Base Load}} + \underbrace{(\beta_N N^{1.3})}_{\substack{\text{Non-linear}\\\text{Crowding}}} + \underbrace{\left( \gamma_{NS} \frac{N^2}{S} \right)}_{\text{Congestion Penalty}} $$
+        $$ E = \underbrace{(\alpha_1 N + \alpha_2 S + \alpha_3 A)}_{\text{Base Load}} + \underbrace{(\beta_N N^{1.3} + \beta_S S^{1.2} + \beta_A A^{0.8})}_{\text{Non-linear Scaling}} + \underbrace{\left( \gamma_{NS} \frac{N^2}{S} \right)}_{\text{Congestion Penalty}} $$
     \end{alertblock}
 
     \textbf{Component Interpretation:}
     \begin{itemize}
-        \item \textbf{Base Load} ($\alpha_1 N + \alpha_2 S$): Direct consumption proportional to attendees and infrastructure.
-        \item \textbf{Non-linear Crowding} ($N^{1.3}$): Super-linear waste generation --- more people $\Rightarrow$ disproportionately more littering (Urban Scaling Law).
+        \item \textbf{Base Load} ($\alpha_1 N + \alpha_2 S + \alpha_3 A$): Direct consumption proportional to attendees, infrastructure, and activities.
+        \item \textbf{Non-linear Scaling}:
+            \begin{itemize}
+                \item $\beta_N N^{1.3}$: Super-linear crowding --- more people $\Rightarrow$ disproportionately more littering (Urban Scaling Law).
+                \item $\beta_S S^{1.2}$: Supply-chain fragmentation with increasing stalls.
+                \item $\beta_A A^{0.8}$: Economies of scale in activities (Six-Tenths Rule).
+            \end{itemize}
         \item \textbf{Congestion Penalty} ($N^2/S$): The critical ``queue'' term.
             \begin{itemize}
                 \item Too few stalls ($S \downarrow$) $\Rightarrow$ Long queues $\Rightarrow$ Frustration \& Littering ($E \uparrow\uparrow$).
@@ -198,15 +206,17 @@
 
 % --- Slide 4/4 ---
 \begin{frame}{3.1 Optimization \& Insights}
-    \begin{exampleblock}{Unconstrained Optimum}
+    \begin{exampleblock}{Optimal Stall Count (Fixed $N$)}
         Differentiating $E$ w.r.t.\ $S$ and setting to zero:
-        $$ \frac{dE}{dS} = \alpha_2 - \gamma_{NS} \frac{N^2}{S^2} = 0 \implies \boxed{S^* = N \sqrt{\frac{\gamma_{NS}}{\alpha_2}}} $$
+        $$ \frac{\partial E}{\partial S} = \alpha_2 + 1.2\,\beta_S\,S^{0.2} - \gamma_{NS} \frac{N^2}{S^2} = 0 $$
+        Approximating for small $\beta_S$ ($\beta_S \approx 0$):
+        $$ \alpha_2 \approx \gamma_{NS} \frac{N^2}{S^2} \implies \boxed{S^* \approx N \sqrt{\frac{\gamma_{NS}}{\alpha_2}}} $$
     \end{exampleblock}
 
     \begin{columns}[T]
         \begin{column}{0.48\textwidth}
             \textbf{Numerical Result ($N = 40{,}000$/day):}
-            $$ S^* = 40000 \sqrt{\frac{0.0005}{18}} \approx \mathbf{210} $$
+            $$ S^* \approx 40000 \sqrt{\frac{0.0005}{18}} \approx \mathbf{210} $$
         \end{column}
         \begin{column}{0.48\textwidth}
             \textbf{Key Insights:}
@@ -214,6 +224,7 @@
                 \item Current practice ($\sim$100 stalls) is \textbf{under-provisioned}.
                 \item Congestion penalty \textbf{dominates} at low $S$.
                 \item Increasing to $\sim$210 stalls paradoxically \textit{reduces} total $E$.
+                \item Sublinear $A^{0.8}$ favors consolidating activities.
             \end{itemize}
         \end{column}
     \end{columns}
@@ -353,10 +364,10 @@
             $W_i$ & Total waste at zone $i$ & kg & Parameter \\
             $D_{ij}$ & Distance zone $i$ to facility $j$ & km & Parameter \\
             \midrule
-            $V_{cap}$ & Vehicle payload (Tata Ace EV) & 750 kg & Constant \\
-            $C_{dist}$ & Transport cost per km & Rs.\,20/km & Constant \\
+            $V_{cap}$ & Vehicle payload (Tata Ace EV) & 600--750 kg & Constant \\
+            $C_{dist}$ & Transport cost per km & Rs.\,15--20/km & Constant \\
             $C_{handling}$ & Handling cost per kg & Rs./kg & Constant \\
-            $C_{fixed}$ & Fixed cost per vehicle per day & Rs.\,800 & Constant \\
+            $C_{fixed}$ & Fixed cost per vehicle per day & Rs.\,500--800 & Constant \\
             $C_{proc,j}$ & Processing cost at facility $j$ & Rs./kg & Constant \\
             \bottomrule
         \end{tabular}

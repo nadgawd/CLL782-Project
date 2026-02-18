@@ -66,7 +66,7 @@ The variables and parameters used in the mathematical model are defined in Table
 ### 4. Data Estimation and Context (IIT Delhi Specifics)
 To ensure the model is grounded in reality, the following well-supported approximations are used for coefficients:
 
-*   **Scope:** The analysis focuses on the **90-acre high-intensity zone** (OAT, Nalanda, LHC, etc.), with a peak footfall of **40,000 attendees** [Module 3.2].
+*   **Scope:** The analysis focuses on the **82-acre high-intensity zone** (OAT, Nalanda, LHC, etc.), with a peak footfall of **40,000 attendees** [Module 3.2].
 *   **Water Demand ($d_i$):**
     *   **Per Capita Need:** During high-activity festivals in Delhi's climate, hydration needs are approx. **250 ml/hour** per person.
     *   **Peak Demand:** $40,000 \times 0.25 = 10,000$ Liters/hour total across the zone.

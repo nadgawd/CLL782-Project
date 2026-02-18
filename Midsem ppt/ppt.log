@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.16)  18 FEB 2026 15:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.16)  18 FEB 2026 15:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1055,7 +1055,7 @@ Dictionary: translator-theorem-dictionary, Language: English
 [2
 
 ]
-Overfull \vbox (20.08792pt too high) detected at line 108
+Overfull \vbox (20.08792pt too high) detected at line 104
  []
 
 
@@ -1063,12 +1063,12 @@ Overfull \vbox (20.08792pt too high) detected at line 108
 [3
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 136
+LaTeX Font Info:    Trying to load font information for U+msa on input line 132
 .
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 136
+LaTeX Font Info:    Trying to load font information for U+msb on input line 132
 .
 
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1078,7 +1078,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: ../Module_3_1/iitd_roi_grid_map.jpg Graphic file (type jpg)
 <use ../Module_3_1/iitd_roi_grid_map.jpg>
 Package pdftex.def Info: ../Module_3_1/iitd_roi_grid_map.jpg  used on input lin
-e 136.
+e 132.
 (pdftex.def)             Requested size: 164.66768pt x 92.60342pt.
 
 
@@ -1089,17 +1089,17 @@ e 136.
 [5
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 182--182
+Underfull \hbox (badness 10000) in paragraph at lines 178--178
 []|\OT1/cmss/m/n/9 Crowding non-lin-ear-ity co-eff.
  []
 
 
-Underfull \hbox (badness 6493) in paragraph at lines 182--182
+Underfull \hbox (badness 6493) in paragraph at lines 178--178
 []|\OT1/cmss/m/n/9 Stall scal-ing non-lin-ear-ity co-eff.
  []
 
 
-Overfull \vbox (6.5222pt too high) detected at line 182
+Overfull \vbox (6.5222pt too high) detected at line 178
  []
 
 
@@ -1107,7 +1107,7 @@ Overfull \vbox (6.5222pt too high) detected at line 182
 [6
 
 ]
-Overfull \vbox (2.26956pt too high) detected at line 205
+Overfull \vbox (2.26956pt too high) detected at line 201
  []
 
 
@@ -1116,16 +1116,16 @@ Overfull \vbox (2.26956pt too high) detected at line 205
 
 ]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 231.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 227.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <8> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 231.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 227.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <6> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 231.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 227.
 
 
-Overfull \vbox (56.63875pt too high) detected at line 231
+Overfull \vbox (56.63875pt too high) detected at line 227
  []
 
 
@@ -1138,10 +1138,10 @@ Overfull \vbox (56.63875pt too high) detected at line 231
 
 ]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <9> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 280.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 276.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 280.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 276.
 
 
 
@@ -1157,10 +1157,10 @@ LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
 
 ]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 356.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 352.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <7> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 356.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 352.
 
 
 
@@ -1223,7 +1223,7 @@ Package rerunfilecheck Info: File `ppt.out' has not changed.
 Here is how much of TeX's memory you used:
  28028 strings out of 474662
  593018 string characters out of 5751108
- 920161 words of memory out of 5000000
+ 921161 words of memory out of 5000000
  50514 multiletter control sequences out of 15000+600000
  575303 words of font info for 96 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
@@ -1248,7 +1248,7 @@ c/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/texlive/202
 live/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
 /texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/lo
 cal/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on ppt.pdf (22 pages, 1319194 bytes).
+Output written on ppt.pdf (22 pages, 1319077 bytes).
 PDF statistics:
  290 PDF objects out of 1000 (max. 8388607)
  209 compressed objects within 3 object streams
